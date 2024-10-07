@@ -69,15 +69,19 @@ println(infnorm([3, -4, 5, -9.3, 3, 6])) # test function infnorm
 
 function firstnorm(vec_::AbstractMatrix{<:Number})
     result = 0
-    for i in axes(vec_, 1)
-        for j in axes(vec_, 2)
-            result += abs(vec_[i, j])
+    for j in axes(vec_, 2)
+        x = 0
+        for i in axes(vec_, 1)
+            x += abs(vec_[i, j])
+        end
+        if x > result
+            result = x
         end
     end
     return result
 end
 
-A = rand(1:10, 3, 3)
+A = rand(1:5, 10, 10)
 println(A)
 println(firstnorm(A)) # test function firstnorm
 
@@ -117,20 +121,42 @@ end
 println(isleap(2020)) # test function isleap
 
 function chesscolor(cell1, cell2)
-    column_num = 0
-    if cell1 < 'a' || cell1 > 'h'
-        return("Некорректный символ для столбца. Должен быть от 'a' до 'h'")
+    a = 0
+    b = 0
+    function check_cell(cell)
+        column = 0
+        row = 0
+        column_num = 0
+        if length(cell) != 2 || typeof(cell[1]) != Char ||  typeof(cell[2]) != Int
+            return "Incorrect input of coordinates of the first cell.  A vector with a symbol and a number is expected"
+        end
+        column, row = cell[1], cell[2]
+        if column < 'a' || column > 'h'
+            return "Incorrect symbol for column.  Must be from 'a' to 'h'"
+        end
+        if row < 1 || row > 8
+            return "Incorrect number for series.  Must be from 1 to 8"
+        end
+        column_num = Int(column) - Int('a') + 1
+        if (column_num + row) % 2 == 0
+            return true
+        else
+            return false
+        end
     end
-    if cell2 < 1 || cell2 > 8
-        return("Некорректное число для ряда. Должно быть от 1 до 8")
-    end
-    column_num = Int(cell1) - Int('a') + 1
-    if (column_num + cell2) % 2 == 0
+
+    a = check_cell(cell1)
+    b = check_cell(cell2)
+
+    if (a == true) && (b == true)
+        return true
+    elseif (a == false) && (b == false)
         return true
     else
         return false
     end
+    
 # true for black cells, false for white cells
 end
 
-println(chesscolor('c', 6)) # test function chesscolor
+println(chesscolor(['h',2], ['b',7])) # test function chesscolor
