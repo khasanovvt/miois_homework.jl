@@ -1,3 +1,5 @@
+include("../src/task02.jl")
+
 @testset "arraysum" begin
     @test arraysum(1:10) == sum(1:10)
 end

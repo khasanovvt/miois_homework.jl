@@ -11,8 +11,6 @@ function getdigits(a)
     return result
 end
 
-println(getdigits(0123)) # test function getdigits
-
 function touppercase(input_text)
     result = ""
     for char in input_text
@@ -30,8 +28,6 @@ function touppercase(input_text)
 # The function may have a problems with other languages
 end
 
-println(touppercase("testing a function with different symbols - 123№")) # test function touppercase
-
 function firstnorm(vec_::AbstractVector{<:Number})
     result = 0
     for i in vec_
@@ -39,8 +35,6 @@ function firstnorm(vec_::AbstractVector{<:Number})
     end
     return result
 end
-
-println(firstnorm([1, 5, -8, 8])) # test function firstnorm
 
 function secondnorm(vec_::AbstractVector{<:Number})
     result = 0
@@ -50,8 +44,6 @@ function secondnorm(vec_::AbstractVector{<:Number})
     result = (result)^(1/2)
     return result
 end
-
-println(secondnorm([3, -4, 5])) # test function secondnorm
 
 function infnorm(vec_::AbstractVector{<:Number})
     result = 0
@@ -64,8 +56,6 @@ function infnorm(vec_::AbstractVector{<:Number})
     end
     return result
 end
-
-println(infnorm([3, -4, 5, -9.3, 3, 6])) # test function infnorm
 
 function firstnorm(vec_::AbstractMatrix{<:Number})
     result = 0
@@ -81,10 +71,6 @@ function firstnorm(vec_::AbstractMatrix{<:Number})
     return result
 end
 
-A = rand(1:5, 10, 10)
-println(A)
-println(firstnorm(A)) # test function firstnorm
-
 function infnorm(vec_::AbstractMatrix{<:Number})
     result = 0
     for i in axes(vec_, 1)
@@ -98,10 +84,6 @@ function infnorm(vec_::AbstractMatrix{<:Number})
     end
     return result
 end
-
-B = rand(1:10, 3, 3)
-println(B)
-println(infnorm(B)) # test function infnorm
 
 function isleap(year)
     if year % 4 == 0
@@ -117,8 +99,6 @@ function isleap(year)
     else return false
     end
 end
-
-println(isleap(2020)) # test function isleap
 
 function chesscolor(cell1, cell2)
     a = 0
@@ -158,5 +138,3 @@ function chesscolor(cell1, cell2)
     
 # true for black cells, false for white cells
 end
-
-println(chesscolor(['h',2], ['b',7])) # test function chesscolor
